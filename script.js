@@ -27,7 +27,9 @@ let cityLatList = [];
 let lowerCaseNames = []
 let filterdList = []
 async function getCitiesArrays() {
-    fetch('./cityList.json')
+    fetch('./cityList.json', {
+        "method": "GET"
+    })
     .then(response => {
         return response.json()
     })
