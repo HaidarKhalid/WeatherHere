@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="images/logo/No-Bg-HaidarKhalid_Weather_website_logo_simple_creative_circle_logo_w_6f7d2559-23e4-445c-a987-6d16d1da7368.png">
+
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherHere</title>
+    <script src="script.js" defer></script>
+</head>
+<body class="bodyTag">
+    <div class="loading-screen">
+        <img src="images/svgs/loading.svg" alt="Loading">
+        <h1>Loading... <br> Please Wait</h1>
+    </div>
+    <nav class="navBar">
+                <input class="searchBar sides" type="text" name="Search" onkeyup="searchBtn(event)" id="searchBar" placeholder="Search...">
+            <ul class="expectUl">
+            </ul>
+            <h3>WeatherHere</h3>
+            <a class="sides contactMe" href="https://haidarkhalid.github.io/portfolio" target="_blank" title="Developer Website"><img src="images/svgs/developer.svg" alt="Developer"></a>
+        </nav>
+        <div class="weatherInfo">
+            <h1  class="cityName">London</h1>
+            <div  class="tempDiv">
+            <h2 class="tempMain">Clouds</h2>
+            <p class="tempDegree">5 c°</p>
+            </div>
+            <p><small class="feelLike">feels Like : 6 c°</small></p>
+            <p><small class="clouds">Clouds : 40%</small></p>
+            <div>
+                <button onclick="changeTemp('c')" class="tempBtn cel activeTemp celActive">C °</button>
+
+                <button onclick="changeTemp('f')" class="tempBtn feh">F °</button>
+            </div>
+        </div>
+        <br>
+        <div class="clock">
+            <h3 class="clock-time">Loading...</h3>
+            <h3 class="clock-date">Loading...</h3>
+        </div>
+        
+    <main>
+    </main>
+</body>
+</html>

@@ -1,0 +1,222 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1d1d1d;
+    color: white;
+    font-family: sans-serif;
+    font-family: 'Righteous', cursive;
+    text-align: center;
+}
+
+/* * Loading Screen */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    z-index: 10;
+    display: flex;
+    /* display: none; */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+
+/* * Nav Bar */
+.navBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-height: 50px;
+    background-color: rgba(0, 0, 0, 0.795);
+    align-items: center;
+}
+.sides {
+    width: 10%;
+}
+
+/* ! Search Bar */
+.searchBar {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background-color: #2e2e2e;
+    color: white;
+    font-weight: 600;
+    font-family: 'Righteous', cursive;
+}
+@media (max-width: 420px) {
+    .searchBar {font-size: 10px;}
+}
+
+/* ! expect Ul and Li */
+.expectUl {
+    position: absolute;
+    left: 14%;
+    top: 80%;
+    background-color: rgba(255, 255, 255, 0.616);
+    list-style: none;
+    padding: 0 10px;
+    max-width: 100px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.expectLi {
+    margin: 10px 0;
+    border-bottom: 1px solid white;
+    transition: 0.3s;
+    text-align: center;
+}
+.expectLi:hover {
+    border-bottom: 1px solid black;
+    color: black;
+}
+@media (max-width: 832px) {
+    .expectUl {left: 12%;}
+}
+@media (max-width: 700px) {
+    .expectUl {
+        left: 11.5%;
+        max-width: 80px;
+    }
+    .expectLi {
+        font-size: small
+    }
+}
+@media (max-width: 450px) {
+    .expectUl {
+        left: 9.8%;
+        max-width: 70px;
+    }
+    .expectLi {
+        font-size: 11px
+    }
+}
+@media (max-width: 420px) {
+    .expectUl {
+        top: 75%;
+        left: 9.1%;
+        max-width: 60px;
+    }
+    .expectLi {
+        font-size: 11px
+    }
+}
+@media (max-width: 350px) {
+    .expectUl {
+        top: 75%;
+        left: 8.8%;
+        max-width: 50px;
+    }
+    .expectLi {
+        font-size: 9px
+    }
+}
+
+
+/* !!! Wather info card */
+
+.weatherInfo {
+    margin: 30vh auto auto auto;
+    border: 1px solid white;
+    border-radius: 20px;
+    display: inline-block;
+    padding: 30px 50px;
+    background-color: rgba(0, 0, 0, 0.501);
+}
+
+.cityName {
+    text-decoration: underline 3px solid white;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+.tempDiv {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 20px;
+}
+
+.tempBtn {
+    margin-top: 20px;
+    padding: 5px;
+    background-color: transparent;
+    color: rgb(160, 160, 160);
+    font-size: 20px;
+    transition: 0.3s;
+}
+.activeTemp {
+    color: white;
+}
+
+.cel {
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+    border-top: 2px solid grey;
+    border-right:  2px solid transparent;
+    margin-right: -3px;
+}
+.celActive {
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+}
+.feh {
+    border-bottom: 2px solid grey;
+    border-right: 2px solid grey;
+    border-top: 2px solid grey;
+    border-left:  2px solid transparent;
+    margin-left: -3px;
+}
+
+.fehActive {
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    border-top: 2px solid white;
+}
+.tempBtn:hover {
+    border: 2px solid white;
+}
+
+.sunTime {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+.sunTime p {
+    font-size: small;
+    border: 1px solid white;
+    padding: 5px;
+}
+
+.clock {
+    border: 1px solid white;
+    display: inline-block;
+    margin: 20px auto auto auto;
+    padding: 8px;
+    border-radius: 8px;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.501);
+}
+
+.bodyTag {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(4px);
+    min-height: 100vh;
+}
