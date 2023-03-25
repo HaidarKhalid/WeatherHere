@@ -10,92 +10,74 @@ function getLocation() {
   function showPosition(position) {
     let l = position.coords.latitude
     let lo = position.coords.longitude
-    setTimeout(()=>{getCity(null, l,lo )}, 3000)
+    getCity(null, l,lo)
   }
   
   function showError(error) {
     // Set the default city as london
     let l = 51.507351
     let lo = -0.127758
-    setTimeout(()=>{getCity(null, l,lo )}, 3000)
+    getCity(null, l,lo)
   }
-  // fetch the cities arrays
-setTimeout(()=>{const url = `http://api.geonames.org/search?featureClass=P&orderby=population&maxRows=1000&username=HaidarKhalid`;
+
+  // ! fetch the cities arrays NEW WAY !
 let cityNamesList = [];
 let cityLngList = [];
 let cityLatList = [];
-let x = []
-let filterdList;
-    fetch(url)
+let lowerCaseNames = []
+let filterdList = []
+async function getCitiesArrays() {
+    fetch('cityList.json')
     .then(response => {
-        const contentType = response.headers.get('Content-Type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-        return response.json();
-        } else {
-        return response.text();
-        }
+        return response.json()
     })
     .then(data => {
-        if (typeof data === 'string') {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data, 'application/xml');
-        const cities = xml.getElementsByTagName('geoname');
-        for (let i = 0; i < cities.length; i++) {
-            const name = cities[i].getElementsByTagName('name')[0].textContent;
-            const lat = cities[i].getElementsByTagName('lat')[0].textContent;
-            const lng = cities[i].getElementsByTagName('lng')[0].textContent;
-            cityNamesList.push(name);
-            cityLngList.push(lng);
-            cityLatList.push(lat);
-            x.push(name.toLowerCase());
+        cityNamesList =  data['Names']
+        cityLatList =  data['Latitude']
+        cityLngList =  data['Longitude']
+        for (let i in cityNamesList) {
+            lowerCaseNames.push(cityNamesList[i].toLowerCase())
         }
-        } else {
-        const cities = data.geonames;
-        const cityList = cities.map(city => {
-            const { name, lat, lng } = city;
-            return { name, lat, lng };
-        });
-        }
-        filterdList = []
-        cityNamesList.forEach(c => filterdList.push(c.toLowerCase()));
+        filterdList = lowerCaseNames
         document.querySelector('.loading-screen').style.display = "none"
         getLocation()
     })
-    .catch(error => alert(error));
-},3000)
+    .catch(err => alert(err))
+}
 
+getCitiesArrays()
 
-let expectUl = document.querySelector('.expectUl')
 // function when key searched
+let expectUl = document.querySelector('.expectUl')
 function searchBtn(event) {
     expectUl.innerHTML = ``
     let inputCity = document.getElementById('searchBar').value.toLowerCase()
     if (event.keyCode > 90 ||event.keyCode < 65 ) {
-        x = filterdList
+        lowerCaseNames = filterdList
         for (let i in inputCity) {
-        x =  x.filter(c => {
+        lowerCaseNames =  lowerCaseNames.filter(c => {
             return (c[i] == inputCity[i])
         })
         }
-        for (let i in x) {
+        for (let i in lowerCaseNames) {
             if (i <= 3) {
                 expectUl.innerHTML += `
-                <li onclick="getCity(${filterdList.indexOf(x[i])})" class="expectLi">${cityNamesList[filterdList.indexOf(x[i])]}</li>
+                <li onclick="getCity(${filterdList.indexOf(lowerCaseNames[i])})" class="expectLi">${cityNamesList[filterdList.indexOf(lowerCaseNames[i])]}</li>
                 `
             }
         }
     } else {
         
-        x = filterdList
+        lowerCaseNames = filterdList
         for (let i in inputCity) {
-        x =  x.filter(c => {
+        lowerCaseNames =  lowerCaseNames.filter(c => {
             return (c[i] == inputCity[i])
         })
         }
-        for (let i in x) {
+        for (let i in lowerCaseNames) {
             if (i <= 3) {
                 expectUl.innerHTML += `
-                <li onclick="getCity(${filterdList.indexOf(x[i])})" class="expectLi">${cityNamesList[filterdList.indexOf(x[i])]}</li>
+                <li onclick="getCity(${filterdList.indexOf(lowerCaseNames[i])})" class="expectLi">${cityNamesList[filterdList.indexOf(lowerCaseNames[i])]}</li>
                 `
             }
         }
@@ -170,7 +152,6 @@ async function getCity(index, latit, longit) {
         getTime(lat, lon)
     }, 60000)
 
-    console.log(json)
 }
 
 function changeTemp(unit) {
@@ -203,7 +184,6 @@ async function getTime(lat, lon) {
         let response = await fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=e78ee3c1459742be8caee1caf1c941d6`)
         let json = await response.json()
         let localTimeZone = (json['features'][0]['properties']['timezone'])
-        console.log(localTimeZone)
         let time = (new Date().toLocaleString("en-US", {timeZone: localTimeZone['name']}))
         let timeArray = time.split(', ')
         clockTimeEl.innerHTML = timeArray[1]
@@ -219,3 +199,51 @@ async function getTime(lat, lon) {
     }
 
 }
+
+
+
+
+  // ! fetch the cities arrays OLD WAY !
+
+  /* 
+const url = `http://api.geonames.org/search?featureClass=P&orderby=population&maxRows=1000&username=HaidarKhalid`;
+
+let filterdList;
+    fetch(url)
+    .then(response => {
+        const contentType = response.headers.get('Content-Type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+        return response.json();
+        } else {
+        return response.text();
+        }
+    })
+    .then(data => {
+        if (typeof data === 'string') {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data, 'application/xml');
+        const cities = xml.getElementsByTagName('geoname');
+        for (let i = 0; i < cities.length; i++) {
+            const name = cities[i].getElementsByTagName('name')[0].textContent;
+            const lat = cities[i].getElementsByTagName('lat')[0].textContent;
+            const lng = cities[i].getElementsByTagName('lng')[0].textContent;
+            cityNamesList.push(name);
+            cityLngList.push(lng);
+            cityLatList.push(lat);
+            x.push(name.toLowerCase());
+        }
+        } else {
+        const cities = data.geonames;
+        const cityList = cities.map(city => {
+            const { name, lat, lng } = city;
+            return { name, lat, lng };
+        });
+        }
+        filterdList = []
+        cityNamesList.forEach(c => filterdList.push(c.toLowerCase()));
+        document.querySelector('.loading-screen').style.display = "none"
+        getLocation()
+    })
+    .catch(error => alert(error));
+
+ */
