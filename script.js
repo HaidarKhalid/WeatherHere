@@ -10,17 +10,17 @@ function getLocation() {
   function showPosition(position) {
     let l = position.coords.latitude
     let lo = position.coords.longitude
-    getCity(null, l,lo )
+    setTimeout(()=>{getCity(null, l,lo )}, 3000)
   }
   
   function showError(error) {
     // Set the default city as london
     let l = 51.507351
     let lo = -0.127758
-    getCity(null, l,lo )
+    setTimeout(()=>{getCity(null, l,lo )}, 3000)
   }
   // fetch the cities arrays
-const url = `http://api.geonames.org/search?featureClass=P&orderby=population&maxRows=1000&username=HaidarKhalid`;
+setTimeout(()=>{const url = `http://api.geonames.org/search?featureClass=P&orderby=population&maxRows=1000&username=HaidarKhalid`;
 let cityNamesList = [];
 let cityLngList = [];
 let cityLatList = [];
@@ -62,7 +62,7 @@ let filterdList;
         getLocation()
     })
     .catch(error => alert(error));
-
+},3000)
 
 
 let expectUl = document.querySelector('.expectUl')
