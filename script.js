@@ -27,7 +27,7 @@ let cityLatList = [];
 let lowerCaseNames = []
 let filterdList = []
 async function getCitiesArrays() {
-    fetch('./cityList.json', {
+    fetch('https://haidarkhalid.github.io/WeatherHere/cityList.json', {
         "method": "GET"
     })
     .then(response => {
